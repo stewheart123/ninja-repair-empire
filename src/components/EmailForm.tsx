@@ -1,8 +1,15 @@
+"use client";
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Mail } from "lucide-react";
+
+const GOOGLE_FORM_ACTION =
+  "https://docs.google.com/forms/d/e/1FAIpQLSdeoiNyQw2qp00hMo-Rny_CBmxYZ-eNIKC5VxUo5xm8SjHrXw/formResponse";
+
+const EMAIL_ENTRY_NAME = "entry.1801551186";
 
 export const EmailForm = () => {
   const [email, setEmail] = useState("");
@@ -11,7 +18,7 @@ export const EmailForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes("@")) {
       toast({
         title: "Invalid email",
@@ -22,16 +29,31 @@ export const EmailForm = () => {
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      const form = new FormData();
+      form.append(EMAIL_ENTRY_NAME, email);
+
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: "POST",
+        mode: "no-cors",
+        body: form,
+      });
+
       toast({
-        title: "Success!",
-        description: "You're on the list! We'll notify you when the course launches.",
+        title: "Success",
+        description: "You are on the list. I will email you when the course launches.",
       });
       setEmail("");
+    } catch {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
@@ -46,6 +68,7 @@ export const EmailForm = () => {
             onChange={(e) => setEmail(e.target.value)}
             className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
             disabled={isSubmitting}
+            required
           />
         </div>
         <Button
