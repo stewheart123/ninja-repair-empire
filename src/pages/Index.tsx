@@ -25,6 +25,7 @@ const Index = () => {
     "Safe iPhone opening techniques (no broken screens)",
     "Professional screen replacement methods",
     "Battery swap procedures",
+    "Phone flipping strategies",
     "Marketing & advertising strategies",
     "Where to source iPhones for profit",
     "Customer acquisition tactics",
@@ -130,8 +131,9 @@ const Index = () => {
             Join a Thriving Community
           </h2>
           <p className="text-xl text-muted-foreground">
-            Get exclusive access to our private group of repair professionals. Share knowledge, 
-            troubleshoot problems together, and stay updated with industry trends.
+            The private community isn't available yet, but you'll be notified when it's ready to join. 
+            Connect with repair professionals, share knowledge, troubleshoot problems together, 
+            and stay updated with industry trends.
           </p>
         </div>
       </section>
