@@ -1,4 +1,3 @@
-import WaitlistEmbed from "@/components/WaitlistEmbed";
 import { EmailForm } from "@/components/EmailForm";
 import { CheckCircle2, Users, BookOpen, Sparkles, Wrench, TrendingUp } from "lucide-react";
 import ninjaLogo from "@/assets/ninja-logo.png";
