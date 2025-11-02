@@ -68,6 +68,8 @@ const Index = () => {
 
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-500 pt-6">
             <EmailForm />
+            <WaitlistEmbed />
+
           </div>
 
           <p className="text-sm text-muted-foreground animate-in fade-in duration-1000 delay-700">
