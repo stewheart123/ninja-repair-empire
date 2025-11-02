@@ -24,6 +24,7 @@ const Index = () => {
   const features = [
     "Safe iPhone opening techniques (no broken screens)",
     "Professional screen replacement methods",
+    "Screen types & quality differences (OEM, Refurbished, Aftermarket)",
     "Battery swap procedures",
     "Phone flipping strategies",
     "Marketing & advertising strategies",
