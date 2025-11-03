@@ -8,16 +8,17 @@ import { Mail, User, Users } from "lucide-react";
 
 // Get the Google Apps Script Web App URL from environment variables
 // Set this in your .env file as VITE_GOOGLE_APPS_SCRIPT_URL
-const GOOGLE_APPS_SCRIPT_URL =
-  import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL ||
-  (() => {
-    if (import.meta.env.DEV) {
-      console.warn(
-        "VITE_GOOGLE_APPS_SCRIPT_URL is not set. Please add it to your .env file."
-      );
-    }
-    return "";
-  })();
+const getGoogleAppsScriptUrl = (): string => {
+  const url = import.meta.env.VITE_GOOGLE_APPS_SCRIPT_URL;
+  if (!url && import.meta.env.DEV) {
+    console.warn(
+      "VITE_GOOGLE_APPS_SCRIPT_URL is not set. Please add it to your .env file."
+    );
+  }
+  return url || "";
+};
+
+const GOOGLE_APPS_SCRIPT_URL = getGoogleAppsScriptUrl();
 
 export const EmailForm = () => {
   const [firstName, setFirstName] = useState("");
