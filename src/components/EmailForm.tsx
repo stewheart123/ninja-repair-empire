@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, User } from "lucide-react";
+import { Mail, User, Users } from "lucide-react";
 
 // Get the Google Apps Script Web App URL from environment variables
 // Set this in your .env file as VITE_GOOGLE_APPS_SCRIPT_URL
@@ -20,7 +20,8 @@ const GOOGLE_APPS_SCRIPT_URL =
   })();
 
 export const EmailForm = () => {
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
@@ -29,10 +30,19 @@ export const EmailForm = () => {
     e.preventDefault();
 
     // Basic validation
-    if (!name || name.trim().length === 0) {
+    if (!firstName || firstName.trim().length === 0) {
       toast({
-        title: "Name required",
-        description: "Please enter your name",
+        title: "First name required",
+        description: "Please enter your first name",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (!lastName || lastName.trim().length === 0) {
+      toast({
+        title: "Last name required",
+        description: "Please enter your last name",
         variant: "destructive",
       });
       return;
@@ -73,7 +83,8 @@ export const EmailForm = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: name.trim(),
+          firstName: firstName.trim(),
+          lastName: lastName.trim(),
           email: email.trim(),
         }),
       });
@@ -84,7 +95,8 @@ export const EmailForm = () => {
         title: "Success!",
         description: "You are on the list. I will email you when the course launches.",
       });
-      setName("");
+      setFirstName("");
+      setLastName("");
       setEmail("");
     } catch (error) {
       toast({
@@ -104,9 +116,21 @@ export const EmailForm = () => {
           <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
             type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            placeholder="First name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
+            disabled={isSubmitting}
+            required
+          />
+        </div>
+        <div className="relative">
+          <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Last name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
             disabled={isSubmitting}
             required

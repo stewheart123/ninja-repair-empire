@@ -4,7 +4,7 @@
  * Instructions:
  * 1. Open Google Sheets and create a new spreadsheet
  * 2. Name the first sheet "Form Submissions" (or change SHEET_NAME below)
- * 3. In row 1, add headers: "Timestamp" | "Name" | "Email"
+ * 3. In row 1, add headers: "Timestamp" | "First Name" | "Last Name" | "Email"
  * 4. Go to Extensions > Apps Script
  * 5. Paste this code and save the project
  * 6. Click Deploy > New deployment > Select type: Web app
@@ -28,18 +28,19 @@ function doPost(e) {
     // If sheet doesn't exist, create it with headers
     if (!sheet) {
       const newSheet = SpreadsheetApp.getActiveSpreadsheet().insertSheet(SHEET_NAME);
-      newSheet.appendRow(["Timestamp", "Name", "Email"]);
+      newSheet.appendRow(["Timestamp", "First Name", "Last Name", "Email"]);
       return createResponse(false, "Sheet created. Please try submitting again.");
     }
     
     // Parse the incoming data
     const data = JSON.parse(e.postData.contents);
-    const name = data.name || "";
+    const firstName = data.firstName || "";
+    const lastName = data.lastName || "";
     const email = data.email || "";
     
     // Basic validation
-    if (!name || !email) {
-      return createResponse(false, "Name and email are required.");
+    if (!firstName || !lastName || !email) {
+      return createResponse(false, "First name, last name, and email are required.");
     }
     
     // Email validation regex
@@ -52,8 +53,8 @@ function doPost(e) {
     const timestamp = new Date();
     
     // Append the new row to the sheet
-    // Format: [Timestamp, Name, Email]
-    sheet.appendRow([timestamp, name, email]);
+    // Format: [Timestamp, First Name, Last Name, Email]
+    sheet.appendRow([timestamp, firstName, lastName, email]);
     
     // Return success response
     return createResponse(true, "Form submitted successfully!");
