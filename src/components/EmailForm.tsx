@@ -116,36 +116,45 @@ export const EmailForm = () => {
         <div className="relative">
           <User className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
+            id="firstName"
+            name="firstName"
             type="text"
             placeholder="First name"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
             className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
             disabled={isSubmitting}
+            autoComplete="given-name"
             required
           />
         </div>
         <div className="relative">
           <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
+            id="lastName"
+            name="lastName"
             type="text"
             placeholder="Last name"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
             className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
             disabled={isSubmitting}
+            autoComplete="family-name"
             required
           />
         </div>
         <div className="relative">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
+            id="email"
+            name="email"
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="pl-10 h-12 bg-secondary border-border focus:border-primary focus:ring-primary"
             disabled={isSubmitting}
+            autoComplete="email"
             required
           />
         </div>
